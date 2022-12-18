@@ -15,16 +15,16 @@ import { fetchProjects } from "../utils/fetchProjects";
 import { fetchSkills } from "../utils/fetchSkills";
 import { fetchSocial } from "../utils/fetchSocials";
 
-// skills: Skill[];
 type Props = {
   pageInfo: PageInfo;
   experiences: Experience[];
+  skills: Skill[];
   projects: Project[];
   socials: Social[];
 };
 
 // skills
-const Home = ({ pageInfo, experiences, projects, socials }: Props) => {
+const Home = ({ pageInfo, experiences, skills, projects, socials }: Props) => {
   return (
     <div
       className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory
@@ -55,9 +55,9 @@ const Home = ({ pageInfo, experiences, projects, socials }: Props) => {
       </section>
 
       {/* Skills */}
-      {/*<section id="skills" className="snap-start">
+      <section id="skills" className="snap-start">
         <Skills skills={skills} />
-      </section>*/}
+      </section>
 
       {/* Projects */}
       <section id="projects" className="snap-start">
@@ -86,11 +86,10 @@ const Home = ({ pageInfo, experiences, projects, socials }: Props) => {
 
 export default Home;
 
-// const skills: Skill[] = await fetchSkills();
-// skills,
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const pageInfo: PageInfo = await fetchPageInfo();
   const experiences: Experience[] = await fetchExperiences();
+  const skills: Skill[] = await fetchSkills();
   const projects: Project[] = await fetchProjects();
   const socials: Social[] = await fetchSocial();
 
@@ -98,6 +97,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     props: {
       pageInfo,
       experiences,
+      skills,
       projects,
       socials,
     },
