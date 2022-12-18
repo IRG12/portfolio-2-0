@@ -6,25 +6,25 @@ import ContactMe from "../components/ContactMe";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Projects from "../components/Projects";
-// import Skills from "../components/Skills";
+import Skills from "../components/Skills";
 import WorkExperience from "../components/WorkExperience";
 import { Experience, PageInfo, Project, Skill, Social } from "../typings";
 import { fetchExperiences } from "../utils/fetchExperiences";
 import { fetchPageInfo } from "../utils/fetchPageInfo";
 import { fetchProjects } from "../utils/fetchProjects";
-// import { fetchSkills } from "../utils/fetchSkills";
+import { fetchSkills } from "../utils/fetchSkills";
 import { fetchSocial } from "../utils/fetchSocials";
 
 type Props = {
   pageInfo: PageInfo;
   experiences: Experience[];
-  // skills: Skill[];
+  skills: Skill[];
   projects: Project[];
   socials: Social[];
 };
 
 // skills
-const Home = ({ pageInfo, experiences, projects, socials }: Props) => {
+const Home = ({ pageInfo, experiences, skills, projects, socials }: Props) => {
   return (
     <div
       className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory
@@ -55,9 +55,9 @@ const Home = ({ pageInfo, experiences, projects, socials }: Props) => {
       </section>
 
       {/* Skills */}
-      {/* <section id="skills" className="snap-start">
+      <section id="skills" className="snap-start">
         <Skills skills={skills} />
-      </section> */}
+      </section>
 
       {/* Projects */}
       <section id="projects" className="snap-start">
@@ -89,7 +89,7 @@ export default Home;
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const pageInfo: PageInfo = await fetchPageInfo();
   const experiences: Experience[] = await fetchExperiences();
-  // const skills: Skill[] = await fetchSkills();
+  const skills: Skill[] = await fetchSkills();
   const projects: Project[] = await fetchProjects();
   const socials: Social[] = await fetchSocial();
 
@@ -97,7 +97,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     props: {
       pageInfo,
       experiences,
-      // skills,
+      skills,
       projects,
       socials,
     },
